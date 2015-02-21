@@ -1,0 +1,17 @@
+<div data-ng-controller="TreeController">
+    <span>{{treeFromData.getSelectedNode().path}}</span>
+
+    <div class="tree well">
+        <ul  dx-start-with="treeFromData.rootNode">
+            <li  ng-repeat="node in $dxPrior.children">
+                <span ng-class="{ active : treeFromData.getSelectedNodeId() == node.id}" >
+                    <i ng-click="treeFromData.toggleExpandNode(node)"
+                       class="glyphicon ng-class:node.leaf ? 'glyphicon-leaf' : node.expanded ? 'glyphicon-folder-open' : 'glyphicon-folder-close';"></i>
+                    <section style="display: inline" ng-click="treeFromData.selectNode(node)"> {{ node.id }}-{{node.data.name}}</section>
+                </span>
+                <ul ng-if="node.expanded" dx-connect="node"/>
+            </li>
+        </ul>
+    </div>
+
+</div>

@@ -1,0 +1,19 @@
+<div data-ng-controller="SimpleController">
+
+    Selected Index:{{nameAndPhone.getSelectedIndex()}}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Last name</th>
+            <th>Phone</th>
+        </tr>
+        </thead>
+        <tr data-ng-click="nameAndPhone.selectIndex($index)" data-ng-repeat="obj in nameAndPhone.getList()"
+            ng-class="{active : nameAndPhone.getSelectedIndex() == $index }">
+            <td>{{obj.name}}</td>
+            <td>{{obj.lastname}}</td>
+            <td>{{obj.phone}}</td>
+        </tr>
+    </table>
+</div>

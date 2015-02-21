@@ -1,0 +1,54 @@
+<section data-ng-controller="HomeController">
+
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12 ">
+            <h3>Simple tree example</h3>
+            <ng-include src="'modules/examples/views/tree.html'">
+            </ng-include>
+
+            <tabset>
+                <tab heading="HTML">
+                    <br>
+
+                    <div hljs="" include="'modules/examples/views/tree.html'" language="javascript"></div>
+                </tab>
+                <tab heading="Javascript">
+                    <br>
+
+                    <div hljs="" include="'modules/examples/controllers/tree.js'" language="javascript"></div>
+                </tab>
+                <tab heading="CSS">
+                    <br>
+
+                    <div hljs="" include="'css/tree.css'" language="css">
+
+                    </div>
+                </tab>
+            </tabset>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h3>Simple table with tree example</h3>
+            <ng-include src="'modules/examples/views/treetable.html'">
+            </ng-include>
+
+            <tabset>
+                <tab heading="HTML">
+                    <br>
+
+                    <div hljs="" include="'modules/examples/views/treetable.html'" language="javascript"></div>
+                </tab>
+                <tab heading="Javascript">
+                    <br>
+
+                    <div hljs="" include="'modules/examples/controllers/treetable.js'" language="javascript"></div>
+                </tab>
+
+            </tabset>
+
+        </div>
+    </div>
+</section>

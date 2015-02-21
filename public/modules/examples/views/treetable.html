@@ -1,0 +1,28 @@
+<div data-ng-controller="TreeTableController">
+    Tree table
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+
+            <th>Path</th>
+            <th>Address</th>
+        </tr>
+        </thead>
+        <tbody>
+
+            <tr  ng-repeat="node in treeFromData.rootNode.expandedNodesAndLeafs">
+                <td><i style="{{'margin-left : '+(node.path.length * 20)+'px' }}" ng-click="treeFromData.toggleExpandNode(node)"
+                       class="glyphicon ng-class:node.leaf ? 'glyphicon-leaf' : node.expanded ? 'glyphicon-folder-open' : 'glyphicon-folder-close';"></i>
+                    {{node.data.name}}
+                </td>
+
+                <td>{{node.path}}</td>
+                <td>{{node.data.address}}</td>
+            </tr>
+
+
+        </tbody>
+
+    </table>
+</div>
