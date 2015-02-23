@@ -1,6 +1,6 @@
 # puremodels - [AngularJS](http://angularjs.org/) common model utilities
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/puremodels?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/raizman2012/puremodels?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ***
 
@@ -14,7 +14,7 @@ As of 17 Jan 2015 The milestones are as follows:
 
 ## Demo
 
-Do you want to see model in action? Visit http://localhost:3000
+Do you want to see model in action? Visit {http://localhost:3000}
 
 ## Installation
 
