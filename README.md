@@ -56,7 +56,6 @@ We are  NOT  testing against IE8.
 
 ### Native, lightweight models
 
-We are aiming at providing a set of AngularJS directives based on Bootstrap's markup and CSS. The goal is to provide **native AngularJS directives** without any dependency on jQuery or Bootstrap's JavaScript.
-It is often better to rewrite an existing JavaScript code and create a new, pure AngularJS directive. Most of the time the resulting directive is smaller as compared to the original JavaScript code size and better integrated into the AngularJS ecosystem.
+We are aiming at providing a set of AngularJS models for better MVC
 
 Good luck with puremodels!
