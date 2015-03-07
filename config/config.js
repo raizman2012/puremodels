@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = {
+	library_name : 'puremodels',
+	library_distdir : './public/dist',
 	app: {
 		title: 'Puremodels',
 		description: 'Javascript model utils',

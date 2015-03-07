@@ -17,5 +17,6 @@ angular.module('core').service('namesAndPhones', [
                 lastname: 'stark2',
                 phone: '34-56-22222-89'
             }];
+
     }
 ]);

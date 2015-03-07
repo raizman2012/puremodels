@@ -7,7 +7,7 @@ angular.module('examples').controller('PubSubController', ['$scope', 'namesAndPh
         $scope.list = new selectableList(namesAndPhones.array);
 
         $scope.list.fireChangeSelectionEvent =
-            function onSelect(oldSelectedObject, newSelectedObject, oldSelectedIndex, newSelectedIndex) {
+            function (oldSelectedObject, newSelectedObject, oldSelectedIndex, newSelectedIndex) {
                 $scope.$bus.publish({
                     channel: 'orders',
                     topic: 'order.new',

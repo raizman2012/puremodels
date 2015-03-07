@@ -6,8 +6,6 @@ var lodash = require('lodash');
 var glob = require('glob');
 
 var config = require('./config');
-var globJavascripts = require('./assets/javascripts');
-var globCss = require('./assets/css');
 
 /**
  * This project is library project, and thats the reason we need special logic for static assets
@@ -35,7 +33,7 @@ module.exports = function (dir) {
                 res.push(def.file);
             }
             if (def.dir !== undefined) {
-                console.log('def.dir:', def.dir);
+                //console.log('def.dir:', def.dir);
                 //console.log('res', res);
                 res = res.concat(glob.sync(def.dir, {cwd : ''}));
             }
@@ -45,14 +43,14 @@ module.exports = function (dir) {
 
     var res = {};
     var files = config.assets;
-    console.log('files: ', files);
+    //console.log('files: ', files);
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
 
         var key = path.basename(file, '.js');
         var all_key = 'all';
         var all = [];
-        console.log(' key', key, ' file:', file);
+        //console.log(' key', key, ' file:', file);
         res[key] = {};
 
 

@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var config = require('./config');
+var config = require('./config/config');
 var assets = require('./config/assets');
 
 var jsFilesToLoad = assets(config.assets).all.javascripts.all;
@@ -44,7 +44,7 @@ module.exports = function(config) {
 		// - Safari (only Mac)
 		// - PhantomJS
 		// - IE (only Windows)
-		browsers: ['Chrome'],
+		browsers: ['PhantomJS'],
 
 		// If browser does not capture in given timeout [ms], kill it
 		captureTimeout: 60000,

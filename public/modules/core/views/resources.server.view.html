@@ -1,0 +1,42 @@
+<section data-ng-controller="ResourcesController">
+    <!--
+    <div class="row">
+        <div class="col-md-12">
+           Resources
+            <button class="btn btn-default" ng-click="test()">test</button>
+        </div>
+    </div>
+    -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h3>Project server side dependences:</h3>
+
+            <tabset>
+                <tab heading="links">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Homepage</th>
+                        </tr>
+                        </thead>
+                        <tr data-ng-repeat="obj in info.infosAboutDependencies" >
+                            <td>{{obj.name}}</td>
+                            <td>{{obj.description}}</td>
+                            <td><a href="{{obj.homepage}}" target="_blank">{{obj.homepage}}</a></td>
+                        </tr>
+                    </table>
+                </tab>
+                <tab heading="package.json">
+                    <br>
+
+                    <div hljs="" source="packageJsonContent" language="javascript"></div>
+                </tab>
+
+
+            </tabset>
+
+        </div>
+    </div>
+</section>

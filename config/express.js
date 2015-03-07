@@ -66,10 +66,36 @@ module.exports = function() {
 	app.get('/', function (req, res) {
 		res.render('index', { title: 'Hey', message: 'Hello there!'});
 	});
+
 	app.get('/test.html', function (req, res) {
 		res.render('test', { test : 'leo'});
 	});
 
+	app.get('/resources', function (req, res) {
+		var article = { test : 'bla'};
+		var packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+		var bowerJson = JSON.parse(fs.readFileSync('bower.json', 'utf8'));
+
+		var infosAboutDependencies = [];
+		for (var curr in packageJson.dependencies) {
+
+			var subpackageJson = JSON.parse(fs.readFileSync('node_modules/'+curr+'/package.json', 'utf8'));
+			infosAboutDependencies.push({
+				name : subpackageJson.name,
+				description : subpackageJson.description,
+				licence : subpackageJson.licence,
+				homepage : subpackageJson.homepage
+			});
+		}
+
+		var info = {
+			packageJson : packageJson,
+			infosAboutDependencies : infosAboutDependencies,
+			bowerJson : bowerJson
+		};
+
+		res.json(info);
+	});
 
 	// Assume 'not found' in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
 	app.use(function(err, req, res, next) {

@@ -2,63 +2,180 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<title>{{title}}</title>
+    <title>{{title}}</title>
 
-	<!-- General META -->
-	<meta charset="utf-8">
-	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- General META -->
+    <meta charset="utf-8">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-	<!-- Semantic META -->
-	<meta name="keywords" content="{{keywords}}">
-	<meta name="description" content="{{description}}">
+    <!-- Semantic META -->
+    <meta name="keywords" content="{{keywords}}">
+    <meta name="description" content="{{description}}">
 
-	<!-- Fav Icon -->
-	<link href="./images/fabiconpoalim.png" rel="shortcut icon" type="image/x-icon">
+    <!-- Fav Icon -->
+    <link href="./images/fabiconpoalim.png" rel="shortcut icon" type="image/x-icon">
 
-	<!--Application CSS Files-->
-	{% for cssFile in assets.cssFromLess %}
-	<link rel="stylesheet" href="{{cssFile}}">
-	{% endfor %}
+    <!--libraries CSS Files-->
+    {% for cssFile in assets.public.css.dependencies %}
+    <link rel="stylesheet" href="{{cssFile}}">
+    {% endfor %}
 
-	<!-- HTML5 Shim -->
-	<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+    <!--Application CSS Files-->
+    {% for cssFile in assets.public.css.src_notests %}
+    <link rel="stylesheet" href="{{cssFile}}">
+    {% endfor %}
+
+    <!-- HTML5 Shim -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 </head>
 
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Poalim theme</a>
-		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav" >
-				<li class="active">
-					<a href="/">Theme</a>
-				</li>
-				<li class="active">
-					<a href="/">Theme1</a>
-				</li>
-			</ul>
-		</div><!--/.nav-collapse -->
-	</div>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Roadmap</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="/">Theme</a>
+                </li>
+                <li class="active">
+                    <a href="/">Theme1</a>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
 </nav>
 
+<div class="container">
+    <div class="row">
 
+        <div class="col-md-12">
 
+            <h2>server side node.js projects roadmap</h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Purpose</th>
+                    <th>Tech</th>
+                    <th>template url</th>
+                    <th>Done</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>library</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>plugin</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>platform</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>web site</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>web portal</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h2>client site HTML5 projects roadmap</h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Purpose</th>
+                    <th>Tech</th>
+                    <th>template url</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>javascript library</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>css framework customization</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>HTML parts gallery</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>UI components library</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Web services application</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Web services portal</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 <!--Libraries JavaScript Files-->
-{% for jsFile in assets.jsLibrariesFiles %}
+{% for jsFile in assets.public.javascripts.dependencies %}
+<script type="text/javascript" src="{{jsFile}}"></script>
+{% endfor %}
+
+<!--not Libraries JavaScript Files-->
+{% for jsFile in assets.public.javascripts.src_notests %}
 <script type="text/javascript" src="{{jsFile}}"></script>
 {% endfor %}
 

@@ -12,8 +12,12 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
                 url: '/',
                 templateUrl: '/modules/core/views/home.client.view.html'
             }).
-            state('resources', {
-                url: '/resources',
+            state('resources_server', {
+                url: '/resources_server',
+                templateUrl: '/modules/core/views/resources.server.view.html'
+            }).
+            state('resource_client', {
+                url: '/resources_client',
                 templateUrl: '/modules/core/views/resources.client.view.html'
             }).
             state('selection', {

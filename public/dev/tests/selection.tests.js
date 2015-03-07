@@ -15,7 +15,6 @@
 
 
         // Then we can start by loading the main application module
-        console.log('testing:', ApplicationConfiguration.applicationModuleName);
         beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
         // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
@@ -31,15 +30,15 @@
             $location = _$location_;
 
             // Initialize the Articles controller.
-            SimpleController = $controller('SimpleController', {
-                $scope: scope
-            });
-
-            console.log('SimpleController', SimpleController);
+            //SimpleController = $controller('SimpleController', {
+            //    $scope: scope
+            //});
+            //
+            //console.log('SimpleController', SimpleController);
         }));
 
-        console.log('SimpleController', SimpleController);
-        it('test creation', inject(function(selectableList) {
+        //console.log('SimpleController', SimpleController);
+        it('test single select', inject(function(selectableList) {
             var list = new selectableList(['0','1']);
 
             // Test service
@@ -51,8 +50,28 @@
             list.selectIndex(1);
             expect(list.getSelectedIndex()).toEqual(1);
 
-            // check controller
-            expect(scope.nameAndPhone).not.toEqual(undefined);
+        }));
+
+        it('test multi select', inject(function(selectableList) {
+            var list = new selectableList(['0','1', '2', '3']);
+
+            list.multiSelect(0);
+            list.multiSelect(2);
+            expect(list.multiSelectedIndexes.length).toEqual(2);
+            expect(list.multiSelectedObjects.length).toEqual(2);
+
+            expect(list.multiSelectedIndexes[0]).toEqual(0);
+            expect(list.multiSelectedIndexes[1]).toEqual(2);
+
+            list.multiSelect(3);
+            expect(list.multiSelectedIndexes[2]).toEqual(3);
+
+            list.unselectAll();
+            expect(list.multiSelectedIndexes.length).toEqual(0);
+
+            list.selectAll();
+            expect(list.multiSelectedIndexes.length).toEqual(list.getList().length);
+            expect(list.multiSelectedObjects.length).toEqual(list.getList().length);
         }));
     });
 }());

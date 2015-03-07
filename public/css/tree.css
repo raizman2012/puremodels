@@ -1,9 +1,12 @@
 .tree {
+
+}
+.tree-panel {
     min-height:20px;
-    padding:19px;
+    padding:10px;
     margin-bottom:20px;
     background-color:#fbfbfb;
-    border:1px solid #999;
+    border:1px solid #dddddd;
     -webkit-border-radius:4px;
     -moz-border-radius:4px;
     border-radius:4px;
@@ -13,13 +16,21 @@
 }
 .tree li {
     list-style-type:none;
+
     margin:0;
     padding:10px 5px 0 5px;
     position:relative
 }
+
+.tree li span {
+    cursor: pointer;
+    -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.26s;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.26s;
+}
 .tree li span.active {
     background-color: #337ab7;
 }
+
 .tree li::before, .tree li::after {
     content:'';
     left:-20px;

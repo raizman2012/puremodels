@@ -1,6 +1,3 @@
-/**
- * Created by leonid.raizmen on 22/12/2014.
- */
 module.exports = {
 
     dependencies: [{
@@ -20,6 +17,11 @@ module.exports = {
             './public/lib/lodash/lodash.min.js',
             './public/lib/postal/lib/postal.min.js']
     }],
+
+    library_src : [
+        {file: './public/dev/module.js'},
+        {dir: './public/dev/services/*.js'}
+    ],
 
     src: [
         {files: ['./public/config.js', './public/application.js']},

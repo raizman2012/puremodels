@@ -4,8 +4,8 @@ angular.module('examples').controller('TreeController', ['$scope', 'tree',
     function ($scope, tree) {
 
         $scope.treemodel = {
-            name: 'Naomi',
-            address: '1600 Amphitheatre',
+            name: 'root',
+            address: 'aroot',
             children: [
                 {
                     name: 'n0',
@@ -23,7 +23,7 @@ angular.module('examples').controller('TreeController', ['$scope', 'tree',
                             name: 'n000',
                             address: 'a00'
                         }, {
-                            name: 'n01',
+                            name: 'n001',
                             address: 'a001'
                         }]
                     }
@@ -47,9 +47,23 @@ angular.module('examples').controller('TreeController', ['$scope', 'tree',
             ]
         };
 
+        $scope.selectNext = function() {
+            $scope.treeFromData.nextNode($scope.treeFromData.getSelectedNode(), function(node) {
+                $scope.treeFromData.selectNode(node);
+            });
+        }
+
+        $scope.expandAll = function() {
+            $scope.treeFromData.expandAllAsync($scope.treeFromData.getSelectedNode(), function() {});
+        }
+
+        $scope.collapseAll = function() {
+            $scope.treeFromData.collapseAll($scope.treeFromData.getSelectedNode());
+        }
         $scope.treeFromData = new tree($scope.treemodel);
         $scope.treeFromData.expandNode($scope.treeFromData.rootNode);
         $scope.treeFromData.selectNode($scope.treeFromData.rootNode);
+
 
     }
 ]);

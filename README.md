@@ -9,7 +9,7 @@
 As of 17 Jan 2015 The milestones are as follows:
 
 * The **0.0.2** milestone will be for bug fixes and more tests
-* The **0.0.3** milestone will contain more functionality for tree and calendar
+* The **0.0.3** milestone will contain more functionality for tree
 
 
 ## Demo
@@ -35,7 +35,7 @@ Project's issue on GitHub should be used discuss bugs and features.
 
 ## FAQ
 
-https://github.com/puremodels/wiki/FAQ
+https://github.com/raizman2012/puremodels/wiki/FAQ
 
 ## Supported browsers
 

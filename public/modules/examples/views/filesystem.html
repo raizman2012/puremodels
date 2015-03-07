@@ -1,0 +1,118 @@
+<div data-ng-controller="FilesystemController">
+
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <ol class="breadcrumb" style="margin-bottom: 10px">
+                <div style="display: inline-block" class="btn-group btn-group-sm " role="group">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>
+                    </button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span>
+                    </button>
+
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-up"></span>
+                    </button>
+                </div>
+                <span style="padding-left: 10px" class="glyphicon glyphicon-road"> </span>
+                <li ng-repeat="node in treeFromData.getNodesBySelectedPath()">
+                    <a ng-if="!$last" href="#">{{node.data.name}}</a>
+                    <span ng-if="$last">{{node.data.name}}</span>
+                </li>
+
+                <div class="btn-group btn-group-sm  pull-right">
+                    <button class="btn btn-default"><span class="glyphicon glyphicon glyphicon-cog"></span></button>
+                </div>
+            </ol>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="tree tree-panel">
+                <!-- tree itself -->
+
+                <!-- show root node with special icon -->
+                <ul style="padding-left: 0px">
+                    <li>
+                       <span ng-class="{ active : treeFromData.getSelectedNodeId() == treeFromData.rootNode.id}">
+                           <i ng-click="treeFromData.toggleExpandNode(treeFromData.rootNode)"
+                              class="glyphicon glyphicon-tree-conifer"></i>
+                           <section style="display: inline"
+                                    ng-click="treeFromData.selectNodeAndLoadChildren(treeFromData.rootNode)">
+                               root
+                           </section></span>
+
+                        <!-- tree markup done with recursive directive -->
+                        <ul dx-start-with="treeFromData.rootNode">
+
+                            <li ng-repeat="node in $dxPrior.children">
+
+                                <!-- tree node markup depends on type of the node -->
+                <span ng-class="{ active : treeFromData.getSelectedNodeId() == node.id}">
+                    <i ng-click="treeFromData.toggleExpandNode(node)"
+                       class="glyphicon ng-class:node.leaf ? 'glyphicon-leaf' : node.expanded ? 'glyphicon-folder-open' : 'glyphicon-folder-close';"></i>
+                    <section style="display: inline" ng-click="treeFromData.selectNodeAndLoadChildren(node)">
+                        {{ node.id }}-{{node.data.name}}
+                    </section>
+                </span>
+
+                                <!-- recursion tag: replaces with 'dx-start-with' -->
+                                <ul ng-if="node.expanded" dx-connect="node"/>
+                            </li>
+
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="folderSelectionChanged value-{{treeFromData.getSelectedNodeId()}}">
+                <table ng-if="!treeFromData.getSelectedNode().leaf"
+                       class="table ">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Modified</th>
+                        <th>Author</th>
+                    </tr>
+                    </thead>
+
+                    <tr data-ng-repeat="node in treeFromData.getSelectedNode().selectableChildren.list"
+                        ng-click="treeFromData.getSelectedNode().selectableChildren.selectIndex($index)"
+                        ng-class="{active : treeFromData.getSelectedNode().selectableChildren.getSelectedIndex() == $index }">
+
+                        <td style="max-width: 10px; overflow-x: visible">
+                            <i ng-if="!node.leaf" ng-click="treeFromData.selectNodeAndLoadChildren(node)"
+                               class="glyphicon ng-class:node.leaf ? 'glyphicon-leaf' : 'glyphicon-folder-close'"></i>
+                            <i ng-if="node.leaf" class="fa fa-file-pdf-o"
+                               ng-click="treeFromData.selectNodeAndExpandParent(node)"></i>
+                        </td>
+
+                        <td style="max-width: 10px; overflow-x: visible; padding-right: 0px">{{$index}}</td>
+
+                        <td>{{node.data.name}}</td>
+                        <td>{{node.data.modified}}</td>
+                        <td>{{node.data.author}}</td>
+                    </tr>
+                    <tr ng-if="!node.leaf && treeFromData.getSelectedNode().selectableChildren.list.length == 0">
+                        <td colspan="42">Folder is empty</td>
+                    </tr>
+                </table>
+                <div ng-if="treeFromData.getSelectedNode().leaf" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="label label-default">{{treeFromData.getSelectedNode().data.name}}</span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        File content here
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

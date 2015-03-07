@@ -1,9 +1,11 @@
 <div data-ng-controller="SimpleController">
 
-    Selected Index:{{nameAndPhone.getSelectedIndex()}}
+
     <table class="table table-bordered">
         <thead>
         <tr>
+            <th></th>
+            <th>#</th>
             <th>Name</th>
             <th>Last name</th>
             <th>Phone</th>
@@ -11,9 +13,22 @@
         </thead>
         <tr data-ng-click="nameAndPhone.selectIndex($index)" data-ng-repeat="obj in nameAndPhone.getList()"
             ng-class="{active : nameAndPhone.getSelectedIndex() == $index }">
+            <td><a class="btn btn-xs btn-default" href="#" ng-click="nameAndPhone.multiToggleSelect($index)">
+                <span class="glyphicon  ng-class:nameAndPhone.multiSelections[$index] ? 'glyphicon-check' : 'glyphicon-unchecked'"></span>
+            </a>
+            </td>
+            <td>{{$index}}</td>
             <td>{{obj.name}}</td>
             <td>{{obj.lastname}}</td>
             <td>{{obj.phone}}</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="onchange value-{{nameAndPhone.getSelectedIndex()}}">Selected
+                Index:{{nameAndPhone.getSelectedIndex()}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">Selected Indexes:{{nameAndPhone.multiSelectedIndexes}}</td>
         </tr>
     </table>
 </div>

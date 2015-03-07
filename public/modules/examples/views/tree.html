@@ -1,8 +1,23 @@
 <div data-ng-controller="TreeController">
-    <span>{{treeFromData.getSelectedNode().path}}</span>
+
 
     <div class="tree well">
-        <ul  dx-start-with="treeFromData.rootNode">
+        <div>
+            <div style="display: inline-block" role="group" >
+                <button type="button" class="btn btn-primary" ng-click="expandAll()">Expand all</button>
+                <button type="button" class="btn btn-primary"  ng-click="collapseAll()">Collapse all</button>
+                <button type="button" class="btn btn-primary">Expand first</button>
+            </div>
+            <div class="btn-group pull-right" role="group">
+                <button type="button" class="btn btn-default">Home</button>
+                <button type="button" class="btn btn-default" ng-click="selectNext()">Next</button>
+                <button type="button" class="btn btn-default">Prev</button>
+                <button type="button" class="btn btn-default">End</button>
+            </div>
+        </div>
+
+        <!-- tree itself -->
+        <ul style="padding-left: 0px" dx-start-with="treeFromData.rootNode">
             <li  ng-repeat="node in $dxPrior.children">
                 <span ng-class="{ active : treeFromData.getSelectedNodeId() == node.id}" >
                     <i ng-click="treeFromData.toggleExpandNode(node)"
@@ -12,6 +27,7 @@
                 <ul ng-if="node.expanded" dx-connect="node"/>
             </li>
         </ul>
+        <h4>Selected node:{{treeFromData.getSelectedNode().path}}</h4>
     </div>
 
 </div>
