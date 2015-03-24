@@ -1,12 +1,12 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'selectableList',
-	function($scope, selectableList) {
+angular.module('core').controller('HomeController', ['$scope', 'selectable',
+	function($scope, selectable) {
 		// This provides Authentication context.
-		console.log(selectableList);
-		var foo = new selectableList([0,1,2]);
-		console.log(foo.getSelectedIndex());
+		//console.log(selectable);
+		var foo = new selectable([0,1,2]);
+		//console.log(foo.getSelectedIndex());
 
 		$scope.hello = 'hello';
 	}

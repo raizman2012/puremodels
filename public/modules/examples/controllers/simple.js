@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('examples').controller('SimpleController', ['$scope', 'selectableList', 'tree',
-    function ($scope, selectableList, tree) {
+angular.module('examples').controller('SimpleController', ['$scope', 'selectable', 'tree',
+    function ($scope, selectable, tree) {
 
-        var nameAndPhone = new selectableList([
+        var nameAndPhone = new selectable([
             {
                 name: 'daniel01',
                 lastname: 'stark0',

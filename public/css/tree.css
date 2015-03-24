@@ -30,7 +30,12 @@
 .tree li span.active {
     background-color: #337ab7;
 }
-
+.tree li.drop-hover span:hover {
+    background-color: lightgreen;
+}
+.tree li.drop-active span:hover {
+    background-color: lightblue;
+}
 .tree li::before, .tree li::after {
     content:'';
     left:-20px;

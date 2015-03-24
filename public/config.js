@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'puremodels.public';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ui.router', 'ui.bootstrap', 'ui.utils', 'dotjem.angular.tree', 'hljs', 'ng-puremodels'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ui.router', 'ui.bootstrap', 'ui.utils', 'dotjem.angular.tree', 'hljs', 'ngDragDrop', 'ng-puremodels'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {

@@ -24,9 +24,17 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
                 url: '/selection',
                 templateUrl: '/modules/core/views/selection.client.view.html'
             }).
+            state('sorting', {
+                url: '/sorting',
+                templateUrl: '/modules/core/views/sorting.client.view.html'
+            }).
             state('recursion', {
                 url: '/recursion',
                 templateUrl: '/modules/core/views/recursion.client.view.html'
+            }).
+            state('grouping', {
+                url: '/grouping',
+                templateUrl: '/modules/core/views/grouping.client.view.html'
             }).
             state('events', {
                 url: '/events',

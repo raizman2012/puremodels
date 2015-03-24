@@ -69,43 +69,117 @@
         </div>
         <div class="col-md-9">
             <div class="folderSelectionChanged value-{{treeFromData.getSelectedNodeId()}}">
-                <table ng-if="!treeFromData.getSelectedNode().leaf"
-                       class="table ">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Modified</th>
-                        <th>Author</th>
-                    </tr>
-                    </thead>
+                <div ng-if="!treeFromData.getSelectedNode().leaf" class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="btn-group btn-group-xs">
+                            <button type="button" class="btn btn-default"><i class="fa  fa-check-square-o"></i>
+                            </button>
+                            <button type="button" class="btn btn-default"><i class="fa  fa-check-square"></i>
+                            </button>
 
-                    <tr data-ng-repeat="node in treeFromData.getSelectedNode().selectableChildren.list"
-                        ng-click="treeFromData.getSelectedNode().selectableChildren.selectIndex($index)"
-                        ng-class="{active : treeFromData.getSelectedNode().selectableChildren.getSelectedIndex() == $index }">
+                        </div>
+                        <div class="btn-group btn-group-xs">
+                            <button type="button" class="btn btn-default"><i class="fa fa-folder-o"></i> New
+                            </button>
+                        </div>
 
-                        <td style="max-width: 10px; overflow-x: visible">
-                            <i ng-if="!node.leaf" ng-click="treeFromData.selectNodeAndLoadChildren(node)"
-                               class="glyphicon ng-class:node.leaf ? 'glyphicon-leaf' : 'glyphicon-folder-close'"></i>
-                            <i ng-if="node.leaf" class="fa fa-file-pdf-o"
-                               ng-click="treeFromData.selectNodeAndExpandParent(node)"></i>
-                        </td>
+                        <div class="btn-group btn-group-xs">
+                            <button type="button" class="btn btn-default">
+                                <i class="fa fa-file-{{menuNewFile.getSelectedObject().id}}-o"></i>
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="mm in menuNewFile.list" ng-click="menuNewFile.selectIndex($index)"><a href="#"><i class="fa fa-file-{{mm.id}}-o fa-fw"></i>&nbsp; {{mm.title}}</a></li>
+                            </ul>
+                        </div>
 
-                        <td style="max-width: 10px; overflow-x: visible; padding-right: 0px">{{$index}}</td>
+                        <div class="pull-right btn-group btn-group-xs">
+                            <button type="button" class="btn btn-default">
+                                <i class="fa fa-{{menuFile.getSelectedObject().id}}"></i>
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="mm in menuFile.list" ng-click="menuFile.selectIndex($index)"><a href="#"><i class="fa fa-{{mm.id}} fa-fw"></i>&nbsp; {{mm.title}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <table class="table ">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Modified</th>
+                            <th>Author</th>
+                        </tr>
+                        </thead>
 
-                        <td>{{node.data.name}}</td>
-                        <td>{{node.data.modified}}</td>
-                        <td>{{node.data.author}}</td>
-                    </tr>
-                    <tr ng-if="!node.leaf && treeFromData.getSelectedNode().selectableChildren.list.length == 0">
-                        <td colspan="42">Folder is empty</td>
-                    </tr>
-                </table>
+                        <tr data-ng-repeat="node in treeFromData.getSelectedNode().selectableChildren.list"
+                            ng-click="treeFromData.getSelectedNode().selectableChildren.selectIndex($index)"
+                            ng-class="{active : treeFromData.getSelectedNode().selectableChildren.getSelectedIndex() == $index }">
+
+                            <td style="max-width: 10px; overflow-x: visible">
+                                <i ng-if="!node.leaf" ng-click="treeFromData.selectNodeAndLoadChildren(node)"
+                                   class="glyphicon ng-class:node.leaf ? 'glyphicon-leaf' : 'glyphicon-folder-close'"></i>
+                                <i ng-if="node.leaf" class="fa fa-file-pdf-o"
+                                   ng-click="treeFromData.selectNodeAndExpandParent(node)"></i>
+                            </td>
+
+                            <td style="max-width: 10px; overflow-x: visible; padding-right: 0px">{{$index}}</td>
+
+                            <td>{{node.data.name}}</td>
+                            <td>{{node.data.modified}}</td>
+                            <td>{{node.data.author}}</td>
+                        </tr>
+                        <tr ng-if="!node.leaf && treeFromData.getSelectedNode().selectableChildren.list.length == 0">
+                            <td colspan="42">Folder is empty</td>
+                        </tr>
+                    </table>
+                </div>
                 <div ng-if="treeFromData.getSelectedNode().leaf" class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <span class="label label-default">{{treeFromData.getSelectedNode().data.name}}</span>
+                            <a class="btn btn-default btn-inverse btn-xs">{{treeFromData.getSelectedNode().data.name}}</a>
+
+                            <div class="btn-group btn-group-xs">
+                                <button type="button" class="btn btn-primary">New</button>
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                        aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Text</a></li>
+                                    <li><a href="#">Ms Word</a></li>
+                                    <li><a href="#">Excell</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Pdf</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group btn-group-xs">
+                                <button type="button" class="btn btn-primary">New</button>
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                        aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Text</a></li>
+                                    <li><a href="#">Ms Word</a></li>
+                                    <li><a href="#">Excell</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Pdf</a></li>
+                                </ul>
+                            </div>
+
                         </h3>
                     </div>
                     <div class="panel-body">

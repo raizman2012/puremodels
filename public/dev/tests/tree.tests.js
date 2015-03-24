@@ -26,12 +26,6 @@
             $httpBackend = _$httpBackend_;
             $location = _$location_;
 
-            // Initialize the Articles controller.
-            //SimpleController = $controller('SimpleController', {
-            //    $scope: scope
-            //});
-
-            //console.log('SimpleController', SimpleController);
         }));
 
 
@@ -101,11 +95,11 @@
 
             //console.log('selected:', treeFromData.getSelectedNode());
             treeFromData.expandAllAsync(treeFromData.rootNode, function() {
-                console.log('expanded');
+                //console.log('expanded');
 
                 treeFromData.collapseAll();
 
-                expect(treeFromData.rootNode.expanded).toEqual(true);
+                expect(treeFromData.rootNode.expanded).toEqual(false);
                 expect(treeFromData.rootNode.children[0].expanded).toEqual(false);
             });
 
@@ -113,7 +107,7 @@
                 if (node === undefined) {
                     return;
                 }
-                console.log('next node:', node.id);
+                //console.log('next node:', node.id);
                 treeFromData.nextNode(node, function(nextNode) {
                     traverseNode(nextNode);
                 });

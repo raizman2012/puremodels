@@ -3,8 +3,8 @@ module.exports = {
     dependencies: [{
         files: ['./public/lib/jquery/dist/jquery.min.js',
             './public/lib/bootstrap/dist/js/bootstrap.min.js',
-            './public/lib/angular/angular.min.js',
-            './public/lib/angular-animate/angular-animate.min.js',
+            './public/lib/angular/angular.js',
+            './public/lib/angular-animate/angular-animate.js',
             './public/lib/angular-bootstrap/ui-bootstrap.min.js',
             './public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
             './public/lib/angular-mocks/angular-mocks.js',
@@ -15,7 +15,9 @@ module.exports = {
             './public/lib/highlightjs/highlight.pack.js',
             './public/lib/angular-highlightjs/angular-highlightjs.min.js',
             './public/lib/lodash/lodash.min.js',
-            './public/lib/postal/lib/postal.min.js']
+            './public/lib/postal/lib/postal.min.js',
+            './public/lib/angular-dragdrop/src/angular-dragdrop.js',
+            './public/lib/jquery-ui/jquery-ui.js']
     }],
 
     library_src : [

@@ -6,7 +6,7 @@
  * structure provider for any object, usefull for complex recurcive structures
  * like trees, file systems, data structure etc
  **/
-angular.module('ng-puremodels').factory('tree', ['selectableList', function (selectableList) {
+angular.module('ng-puremodels').factory('tree', ['selectable', function (selectable) {
     var result = function (someObject, provider) {
         var _this = this;
         var root = someObject;
@@ -36,11 +36,101 @@ angular.module('ng-puremodels').factory('tree', ['selectableList', function (sel
             };
         }
 
+        function getParent(node) {
+            var path = node.path;
+            if (path.length === 0) {
+                return undefined; // root
+            }
+            var currNode = rootNode;
+            for (var i = 0; i < path.length - 1; i++) {
+                var currNode = currNode.children[path[i]];
+            }
+            return currNode;
+        }
+
+        function resetNode(node) {
+            //console.log('resetNode');
+            if (node.children === undefined) {
+                return;
+            }
+
+            if (node.leaf) {
+                return;
+            }
+
+            for (var i = 0; i < node.children.length; i++) {
+                var currNode = node.children[i];
+
+
+                var path = node.path.slice(0);
+                path.push(i);
+                currNode.path = path;
+
+                currNode.id = currNode.path.join('-');
+
+                resetNode(currNode);
+            }
+        }
+
+        function dropNodeOnAnotherNode(node, anotherNode) {
+            console.log('anotherNode:', anotherNode);
+            if (anotherNode.leaf) {
+                //console.log('move', node.path);
+                moveNodeAfterAnotherNode(node, anotherNode);
+                return;
+            } else {
+                // drop on folder should add node to children
+                deleteNode(node);
+                addNode(node, anotherNode);
+            }
+        }
+
+        function addNode(node, anotherNode) {
+            anotherNode.children.push(node);
+            resetNode(anotherNode);
+        }
+
+        function deleteNode(node) {
+            //console.log('delete node:', node.id, ' p:', node.path);
+            var parentNode = getParent(node);
+            if (parentNode === undefined) {
+                return; // cant remove root
+            }
+            var indexOfNodeInParent = node.path[node.path.length-1];
+            //console.log('delete node indexOfNodeInParent: ', indexOfNodeInParent);
+
+            //console.log(' parentNode.children',  parentNode.children.length);
+            parentNode.children.splice(indexOfNodeInParent, 1);
+            //console.log(' parentNode.children',  parentNode.children.length);
+            resetNode(parentNode);
+        }
+
+        function moveNodeAfterAnotherNode(node, anotherNode) {
+            //console.log('hey, you move me:' , node.path, ' on ', anotherNode.path);
+            deleteNode(node);
+
+            var parentOfAnotherNode = getParent(anotherNode);
+            //console.log('parentOfAnotherNode.path:', parentOfAnotherNode.path);
+            var index = parentOfAnotherNode.children.length; // default
+
+            // find index of another node, which can be probably changed after deleting
+            for (var i = 0; i < parentOfAnotherNode.children.length; i++) {
+                var curr = parentOfAnotherNode.children[i];
+                if (curr === anotherNode) {
+                    index = i;
+                    break;
+                }
+            }
+
+            parentOfAnotherNode.children.splice(index+1, 0, node);
+
+            resetNode(parentOfAnotherNode);
+        }
+
         function createNode(index, parentNode, object) {
-            var res = {path: [], parent: parentNode, data: object, leaf: true, loading: true, expanded: false};
+            var res = {path: [], data: object, leaf: true, loading: true, expanded: false};
 
             res.leaf = provider.isLeaf(object);
-
 
             if (parentNode === undefined) {
                 return res;
@@ -134,7 +224,7 @@ angular.module('ng-puremodels').factory('tree', ['selectableList', function (sel
                         }
 
 
-                        node.selectableChildren = new selectableList(node.children);
+                        node.selectableChildren = new selectable(node.children);
 
                         if (callback !== undefined) {
                             callback(node);
@@ -195,6 +285,9 @@ angular.module('ng-puremodels').factory('tree', ['selectableList', function (sel
             }
 
             node.expanded = false;
+            if (node.children === undefined) {
+                return;
+            }
             for (var i = 0; i < node.children.length; i++) {
                 var child = node.children[i];
 
@@ -208,7 +301,7 @@ angular.module('ng-puremodels').factory('tree', ['selectableList', function (sel
             var current = nn;
             var found = undefined;
             while (found === undefined) {
-                var current = current.parent;
+                var current = getParent(current);
                 if (current === undefined) {
                     break; // root node
                 }
@@ -216,10 +309,11 @@ angular.module('ng-puremodels').factory('tree', ['selectableList', function (sel
                 var indexInParent = current.path[current.path.length-1];
                 var nextIndexInParent = indexInParent+1;
 
-                if (current.parent === undefined || current.parent.children.length === nextIndexInParent) {
+                var currentParent = getParent(current);
+                if (currentParent === undefined || currentParent.children.length === nextIndexInParent) {
                     continue;
                 } else {
-                    found = current.parent.children[nextIndexInParent];
+                    found = currentParent.children[nextIndexInParent];
                     break;
                 }
             }
@@ -233,8 +327,9 @@ angular.module('ng-puremodels').factory('tree', ['selectableList', function (sel
                 return;
             }
 
+            var nodeParent = getParent(node);
             if (node.leaf) {
-                if (node.parent === undefined) {
+                if (nodeParent === undefined) {
                     callback(undefined); // root without an children
                     return;
                 }
@@ -244,11 +339,11 @@ angular.module('ng-puremodels').factory('tree', ['selectableList', function (sel
             var nextIndexInParent = indexInParent+1;
             if (node.leaf) {
                 //console.log('leaf');
-                if (node.parent.children.length === nextIndexInParent) {
+                if (nodeParent.children.length === nextIndexInParent) {
                     callback(findNextInParent(node));
                 } else {
                     // return next child
-                    callback(node.parent.children[nextIndexInParent]);
+                    callback(nodeParent.children[nextIndexInParent]);
                     return;
                 }
             } else {
@@ -288,7 +383,8 @@ angular.module('ng-puremodels').factory('tree', ['selectableList', function (sel
 
         function selectNodeAndExpandParent(node) {
             selectNode(node);
-            expandNode(node.parent);
+
+            expandNode(getParent(node));
         }
 
         function collectExpandedNodesWithLeafs(currNode, resArray) {
@@ -518,6 +614,13 @@ angular.module('ng-puremodels').factory('tree', ['selectableList', function (sel
         this.expandAllAsync = expandAllAsync;
 
         this.collapseAll = collapseAll;
+
+        // add/remove/move
+        this.addNode = addNode;
+        this.dropNodeOnAnotherNode = dropNodeOnAnotherNode;
+        this.deleteNode = deleteNode;
+        this.resetNode = resetNode;
+        this.getParent = getParent;
     }
 
     return result;

@@ -1,0 +1,105 @@
+<div data-ng-controller="GroupingController">
+
+    <div class="row">
+        <div class="col-md-9">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span>Customers</span>
+                    <div class="inline-block pull-right">Grouped by:
+                        <div class="btn-group btn-group-xs">
+                            <button type="button" class="btn btn-default">
+                                {{propertiesGrouping.getSelectedObject().pname}}
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="mm in propertiesGrouping.list" ng-click="propertiesGrouping.selectIndex($index)">
+                                    <a >
+                                       {{mm.pname}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                    <tr>
+
+                        <th>name</th>
+                        <th>address</th>
+                        <th>age</th>
+                        <th>work</th>
+                        <th>income</th>
+                        <th>registrated</th>
+                        <th>status</th>
+                        <th>likes</th>
+                    </thead>
+                    <tr ng-if="customerGrouped === undefined" data-ng-repeat="obj in customers.list">
+
+                        <td>{{obj.name}}</td>
+                        <td>{{obj.address}}</td>
+                        <td>{{obj.age}}</td>
+                        <td>{{obj.work}}</td>
+                        <td>{{obj.income}}</td>
+                        <td>{{obj.registrated_date}}</td>
+                        <td>{{obj.status}}</td>
+                        <td>{{obj.likes}}</td>
+                    </tr>
+
+                    <tr ng-if="customerGrouped !== undefined" ng-repeat-start="(key, value) in customerGrouped">
+
+                        <td colspan="23">Group <span class="label label-success">{{key}}</span> has {{value.length}} customers</td>
+
+                    </tr>
+                    <tr ng-if="customerGrouped !== undefined" ng-repeat-end data-ng-repeat="obj in value">
+
+                        <td>{{obj.name}}</td>
+                        <td>{{obj.address}}</td>
+                        <td>{{obj.age}}</td>
+                        <td>{{obj.work}}</td>
+                        <td>{{obj.income}}</td>
+                        <td>{{obj.registrated_date}}</td>
+                        <td>{{obj.status}}</td>
+                        <td>{{obj.likes}}</td>
+                    </tr>
+                </table>
+
+
+
+            </div>
+            <pagination style="display: inherit" total-items="pager.totalItems"
+                        ng-model="pager.currentPage"
+                        max-size="pager.maxSize"
+                        items-per-page="pager.itemsPerPage"
+                        class="pagination-sm"
+                        boundary-links="true"></pagination>
+
+        </div>
+        <div class="col-md-3">
+            <div ng-repeat="pp in propertiesGrouping.getList()">
+                <div ng-if="result[pp.pname] !== undefined" class="panel panel-default">
+                    <div class="panel-heading">
+                        <span>{{pp.pname}}</span>
+                        <span class="pull-right">{{pp.type}}</span>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="(key, value) in result[pp.pname]">
+                            <span>{{key}}</span>
+                            <span class="pull-right badge">{{value}}</span>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>

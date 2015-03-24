@@ -1,7 +1,7 @@
 <div data-ng-controller="TreeController">
 
 
-    <div class="tree well">
+    <div class="tree well simpleDemo">
         <div>
             <div style="display: inline-block" role="group" >
                 <button type="button" class="btn btn-primary" ng-click="expandAll()">Expand all</button>
@@ -18,12 +18,20 @@
 
         <!-- tree itself -->
         <ul style="padding-left: 0px" dx-start-with="treeFromData.rootNode">
-            <li  ng-repeat="node in $dxPrior.children">
-                <span ng-class="{ active : treeFromData.getSelectedNodeId() == node.id}" >
+            <li ng-repeat="node in $dxPrior.children"
+                data-drop="true" data-jqyoui-options="{hoverClass: 'drop-hover', activeClass: 'drop-active'}"
+                jqyoui-droppable="{stack:true, multiple : true, onDrop:'dropCallback(node)',onOver: 'overCallback', onOut: 'outCallback'}">
+
+                <span ng-class="{ active : treeFromData.getSelectedNodeId() == node.id}"
+                      data-drag="true"
+
+                      data-jqyoui-options="{ revert: 'valid'}"
+                      jqyoui-draggable="{placeholder:true, animate:true, onStart:'startCallback(node)', onStop: 'stopCallback', onDrag: 'dragCallback'}">
                     <i ng-click="treeFromData.toggleExpandNode(node)"
                        class="glyphicon ng-class:node.leaf ? 'glyphicon-leaf' : node.expanded ? 'glyphicon-folder-open' : 'glyphicon-folder-close';"></i>
                     <section style="display: inline" ng-click="treeFromData.selectNode(node)"> {{ node.id }}-{{node.data.name}}</section>
                 </span>
+
                 <ul ng-if="node.expanded" dx-connect="node"/>
             </li>
         </ul>

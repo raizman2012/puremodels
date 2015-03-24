@@ -1,6 +1,3 @@
-/**
- * Created by leonid.raizmen on 16/02/2015.
- */
 'use strict';
 
 (function() {
@@ -38,8 +35,8 @@
         }));
 
         //console.log('SimpleController', SimpleController);
-        it('test single select', inject(function(selectableList) {
-            var list = new selectableList(['0','1']);
+        it('test single select', inject(function(selectable) {
+            var list = new selectable(['0','1']);
 
             // Test service
             expect(list.getSelectedIndex()).toEqual(-1);
@@ -52,8 +49,8 @@
 
         }));
 
-        it('test multi select', inject(function(selectableList) {
-            var list = new selectableList(['0','1', '2', '3']);
+        it('test multi select', inject(function(selectable) {
+            var list = new selectable(['0','1', '2', '3']);
 
             list.multiSelect(0);
             list.multiSelect(2);

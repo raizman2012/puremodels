@@ -1,0 +1,56 @@
+<div data-ng-controller="SortableController">
+
+    <div class="row">
+        <div class="col-md-9">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>
+                        <span>Name</span>
+                <span ng-click="nameAndPhone.sorting.sortToggle('name')"
+                      style="height : inherit; line-height: inherit" class="pull-right fa-stack">
+                    <i class="fa fa-sort fa-stack-1x"></i>
+                    <i class="fa fa-stack-1x ng-class:nameAndPhone.sorting.getStatusVerbose('name', ['text-danger fa-sort-asc', 'fa-sort', 'text-primary fa-sort-desc'])"></i>
+                </span>
+                    </th>
+                    <th><span>Last name</span>
+                <span ng-click="nameAndPhone.sorting.sortToggle('lastname')"
+                      style="height : inherit; line-height: inherit" class="pull-right fa-stack">
+                    <i class="fa fa-sort fa-stack-1x"></i>
+                    <i class="fa fa-stack-1x ng-class:nameAndPhone.sorting.getStatusVerbose('lastname', ['text-danger fa-sort-asc', 'fa-sort', 'text-primary fa-sort-desc'])"></i>
+                </span>
+                    </th>
+                    <th >City<span sort-th sorting="nameAndPhone.sorting" pname="'city'" /></th>
+                    <th>Phone</th>
+                </tr>
+                </thead>
+                <tr data-ng-click="nameAndPhone.selectable.selectIndex($index)" data-ng-repeat="obj in nameAndPhone.list"
+                    ng-class="{active : nameAndPhone.selectable.getSelectedIndex() == $index }">
+                    <td style="cursor: hand; width : 2px; overflow-x: visible"
+                        ng-click="nameAndPhone.selectable.multiToggleSelect($index)">
+                        <span class="glyphicon  ng-class:nameAndPhone.selectable.multiSelections[$index] ? 'glyphicon-check' : 'glyphicon-unchecked'"></span>
+                    </td>
+                    <td>{{obj.name}}</td>
+                    <td>{{obj.lastname}}</td>
+                    <td>{{obj.city}}</td>
+                    <td>{{obj.phone}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+        <div class="col-md-3">
+            <ul class="list-group">
+                <li class="list-group-item active">Sorted by column:</li>
+                <li class="list-group-item" ng-if="nameAndPhone.sorting.statusesOrderedFifo == 0">Not sorted yet</li>
+                <li class="list-group-item" ng-repeat="name in nameAndPhone.sorting.statusesOrderedFifo">
+                    <span class="badge">{{nameAndPhone.sorting.statuses[name].sortDir}}</span>
+                    {{name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</div>

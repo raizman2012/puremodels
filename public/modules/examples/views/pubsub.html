@@ -1,36 +1,55 @@
 <div data-ng-controller="PubSubController">
-    <table class="table table-bordered">
-        <thead>
-        <tr  data-ng-click="test()">
-            <th>Name</th>
-            <th>Last name</th>
-            <th>Phone</th>
-        </tr>
-        </thead>
-        <tr data-ng-click="list.selectIndex($index)" data-ng-repeat="obj in list.getList()"
-            ng-class="{active : list.getSelectedIndex() == $index }">
-            <td>{{obj.name}}</td>
-            <td>{{obj.lastname}}</td>
-            <td>{{obj.phone}}</td>
-        </tr>
-    </table>
-    <br />
-    <h3>Events:</h3>
-    <table class="table table-bordered table-condensed">
-        <thead>
-        <tr  data-ng-click="test()">
-            <th>old name</th>
-            <th>old  index</th>
-            <th>new name name</th>
-            <th>new  index</th>
-        </tr>
-        </thead>
-        <tr data-ng-repeat="obj in listOfEvents"
-            ng-class="{active : nameAndPhone.getSelectedIndex() == $index }">
-            <td>{{obj.oldSelectedObject.name}}</td>
-            <td>{{obj.oldSelectedIndex}}</td>
-            <td>{{obj.newSelectedObject.name}}</td>
-            <td>{{obj.newSelectedIndex}}</td>
-        </tr>
-    </table>
+    <div class="row">
+        <div class="col-md-7">
+            <!-- table for data objects -->
+            <table class="table table-bordered">
+                <thead>
+                <tr data-ng-click="test()">
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Last name</th>
+                    <th>Phone</th>
+                </tr>
+                </thead>
+                <tr data-ng-click="list.selectIndex($index)" data-ng-repeat="obj in list.getList()"
+                    ng-class="{active : list.getSelectedIndex() == $index }">
+                    <td>{{$index}}</td>
+                    <td>{{obj.name}}</td>
+                    <td>{{obj.lastname}}</td>
+                    <td>{{obj.phone}}</td>
+                </tr>
+            </table>
+            <br/>
+
+        </div>
+
+        <div class="col-md-5">
+            <!-- table for events -->
+            <div class="panel panel-default">
+                <div class="panel-heading">Events
+                    <a title="erase all" ng-click="listOfEvents = []"
+                            class="btn btn-default btn-xs pull-right"><i class=" glyphicon glyphicon-trash"></i></a>
+                    </div>
+                <table class="table table-bordered table-condensed">
+                    <thead>
+                    <tr data-ng-click="test()">
+                        <th>old name</th>
+                        <th>old index</th>
+                        <th>new name name</th>
+                        <th>new index</th>
+                    </tr>
+                    </thead>
+                    <tr ng-if="listOfEvents.length == 0">
+                        <td colspan="42">No events, click on rows</td>
+                    </tr>
+                    <tr data-ng-repeat="obj in listOfEvents">
+                        <td>{{obj.oldSelectedObject.name}}</td>
+                        <td>{{obj.oldSelectedIndex}}</td>
+                        <td>{{obj.newSelectedObject.name}}</td>
+                        <td>{{obj.newSelectedIndex}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

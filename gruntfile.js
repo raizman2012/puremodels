@@ -100,5 +100,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('prepare_release', ['concat:dist', 'uglify:dist', 'ngdocs:api']);
 
 	// Default task(s).
-	grunt.registerTask('default', ['concurrent:default']);
+	grunt.registerTask('default', ['less', 'concurrent:default']);
 };

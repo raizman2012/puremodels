@@ -9,14 +9,15 @@
  *
  * Two modules of selection are not affecting each other.
  **/
-angular.module('ng-puremodels').factory('selectableList', function () {
+angular.module('ng-puremodels').factory('selectable', function () {
     var res = function (someList) {
         var _this = this;
-        var list = someList.slice(0);
+        var list = someList !== undefined ? someList.slice(0) : [];
 
         // for single selection
         var selectedIndex = -1;
         var selectedObject = undefined;
+
 
         // for 'multi' selection
         var multiSelections = [];
@@ -28,7 +29,7 @@ angular.module('ng-puremodels').factory('selectableList', function () {
             multiSelections.push(false);
         }
 
-        function clearArray (array) {
+        function clearArray(array) {
             while (array.length) {
                 array.pop();
             }
@@ -82,12 +83,47 @@ angular.module('ng-puremodels').factory('selectableList', function () {
             fireChangeMultiSelectionEvent(-1, undefined);
         }
 
+
+        function restoreSelection() {
+            // empty selection arrays
+            clearArray(multiSelections);
+            clearArray(multiSelectedIndexes);
+
+            for (var i = 0; i < list.length; i++) {
+                multiSelections.push(false);
+            }
+
+            for (var i = 0; i < multiSelectedObjects.length; i++) {
+                var oldSelected = multiSelectedObjects[i];
+                for (var j = 0; j < list.length; j++) {
+                    var currInList = list[j];
+
+                    if (_this.equal(oldSelected, currInList)) {
+                        multiSelections[j] = true;
+                    }
+                }
+            }
+
+            rebuildMultiSelectionArrays();
+
+            // do same for single selection
+            selectedIndex = -1;
+            if (selectedObject !== undefined) {
+                for (var j = 0; j < list.length; j++) {
+                    var currInList = list[j];
+
+                    if (_this.equal(selectedObject, currInList)) {
+                        selectedIndex = j;
+                    }
+                }
+            }
+        }
+
         // private method
         // set selected value and fire event if value was changed
         function multiSetSelection(i, value) {
             var oldValue = multiSelections[i];
             multiSelections[i] = value;
-            console.log('oldValue:', oldValue, 'value :', value);
             if (oldValue !== value) {
                 fireChangeMultiSelectionEvent(i, value);
             }
@@ -123,6 +159,9 @@ angular.module('ng-puremodels').factory('selectableList', function () {
         // single selection methods
         function getSelectedIndex() {
             return selectedIndex;
+        }
+        function getSelectedObject() {
+            return selectedObject;
         }
 
         function setSelectedAndFireChangeEvent(i) {
@@ -200,6 +239,7 @@ angular.module('ng-puremodels').factory('selectableList', function () {
          */
         this.getSelectedIndex = getSelectedIndex;
 
+        this.getSelectedObject = getSelectedObject;
 
         /**
          * @ngdoc method
@@ -374,6 +414,30 @@ angular.module('ng-puremodels').factory('selectableList', function () {
          */
         this.list = list;
 
+        this.idPropertyNames = undefined;
+
+        this.restoreSelection = restoreSelection;
+
+        this.equal = function (o1, o2) {
+            if (_this.idPropertyNames === undefined) {
+                _this.idPropertyNames = [];
+                for (var prop in _this.idPropertyNames) {
+                    _this.idPropertyNames.push(prop);
+                }
+            }
+            if (_this.idPropertyNames.length === 0) {
+                return o1 === o2;
+            }
+            for (var i = 0; i < _this.idPropertyNames.length; i++) {
+                var prop = _this.idPropertyNames[i];
+                var v1 = o1[prop];
+                var v2 = o2[prop];
+                if (v1 !== v2) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     return res;

@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('examples').controller('PubSubController', ['$scope', 'namesAndPhones', 'selectableList',
-    function ($scope, namesAndPhones, selectableList) {
+angular.module('examples').controller('PubSubController', ['$scope', 'namesAndPhones', 'selectable',
+    function ($scope, namesAndPhones, selectable) {
 
         $scope.listOfEvents = [];
-        $scope.list = new selectableList(namesAndPhones.array);
+        $scope.list = new selectable(namesAndPhones.array);
 
         $scope.list.fireChangeSelectionEvent =
             function (oldSelectedObject, newSelectedObject, oldSelectedIndex, newSelectedIndex) {
