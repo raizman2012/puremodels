@@ -39,6 +39,21 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             state('events', {
                 url: '/events',
                 templateUrl: '/modules/core/views/pubsub.client.view.html'
+            }).
+            state('documentum', {
+                url: '/documentum',
+                templateUrl: '/modules/core/views/documentum.client.view.html'
+            }).
+            state('search', {
+                url: "/search/:tags",
+                templateUrl: '/modules/core/views/snippets.client.view.html'
+            }).
+            state('snippets', {
+                url: "/snippets",
+                templateUrl: '/modules/core/views/snippets.client.view.html'
+            }).state('snippet', {
+                url: "/snippet/:snippetId",
+                templateUrl: '/modules/core/views/snippet.client.view.html'
             });
     }
 ]);

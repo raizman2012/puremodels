@@ -5,13 +5,16 @@ module.exports = {
             './public/lib/bootstrap/dist/js/bootstrap.min.js',
             './public/lib/angular/angular.js',
             './public/lib/angular-animate/angular-animate.js',
+            './public/lib/angular-route/angular-route.js',
             './public/lib/angular-bootstrap/ui-bootstrap.min.js',
             './public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
             './public/lib/angular-mocks/angular-mocks.js',
+            './public/lib/angular-cookies/angular-cookies.js',
             './public/lib/angular-resource/angular-resource.min.js',
             './public/lib/angular-ui-router/release/angular-ui-router.min.js',
             './public/lib/angular-ui-utils/ui-utils.min.js',
             './public/lib/dotjem-angular-tree/dotjem-angular-tree.js',
+            './public/lib/angular-translate/angular-translate.js',
             './public/lib/highlightjs/highlight.pack.js',
             './public/lib/angular-highlightjs/angular-highlightjs.min.js',
             './public/lib/lodash/lodash.min.js',
@@ -26,11 +29,13 @@ module.exports = {
     ],
 
     src: [
-        {files: ['./public/config.js', './public/application.js']},
+        {files: ['./public/config.js', './public/application.js', './public/translations.js']},
         {file: './public/dev/module.js'},
         {dir: './public/dev/*/*.js'},
         {dir: './public/modules/*/*.js'},
-        {dir: './public/modules/*/*/*.js'}
+        {dir: './public/modules/*/*/*.js'},
+        {dir: './public/modules/snippets/*/*/*.js'},
+        {dir: './public/modules/documentum/*/*/*.js'}
     ],
 
     tests: [

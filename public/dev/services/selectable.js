@@ -83,6 +83,16 @@ angular.module('ng-puremodels').factory('selectable', function () {
             fireChangeMultiSelectionEvent(-1, undefined);
         }
 
+        function indexOf(object) {
+            for (var j = 0; j < list.length; j++) {
+                var currInList = list[j];
+
+                if (_this.equal(object, currInList)) {
+                    return j;
+                }
+            }
+            return -1;
+        }
 
         function restoreSelection() {
             // empty selection arrays
@@ -122,6 +132,9 @@ angular.module('ng-puremodels').factory('selectable', function () {
         // private method
         // set selected value and fire event if value was changed
         function multiSetSelection(i, value) {
+            if (i < 0 || i >= list.length) {
+                return;
+            }
             var oldValue = multiSelections[i];
             multiSelections[i] = value;
             if (oldValue !== value) {
@@ -239,6 +252,16 @@ angular.module('ng-puremodels').factory('selectable', function () {
          */
         this.getSelectedIndex = getSelectedIndex;
 
+        /**
+         * @ngdoc method
+         * @name getSelectedObject
+         * @methodOf ng-puremodels.service:selectableList
+         *
+         * @description
+         * return selected object in the array, or undefined if nothing selected
+         *
+         *
+         */
         this.getSelectedObject = getSelectedObject;
 
         /**
@@ -413,6 +436,17 @@ angular.module('ng-puremodels').factory('selectable', function () {
          * array of objects
          */
         this.list = list;
+
+        /**
+         * @ngdoc method
+         * @name indexOf
+         * @propertyOf ng-puremodels.service:selectableList
+         *
+         * @description
+         * find index of object in list, based on 'equal' method
+         * return index or -1
+         */
+        this.indexOf = indexOf;
 
         this.idPropertyNames = undefined;
 

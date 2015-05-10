@@ -1,0 +1,34 @@
+<section data-ng-controller="SnippetController">
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h3 translate>snippet</h3>
+
+            <div ng-if="snippetResource">
+
+                <div ng-include="snippetResource.templateHtml"></div>
+
+            </div>
+            <div ng-if="snippetResource === undefined">
+                Loading...
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h3 translate>sources</h3>
+            <tabset>
+                <tab heading="HTML">
+                    <br>
+
+                    <div style="direction: ltr" hljs="" include="snippetResource.templateHtml" language="javascript"></div>
+                </tab>
+                <tab heading="Javascript">
+                    <br>
+
+                    <div  style="direction: ltr" hljs="" include="snippetResource.controllerJs" language="javascript"></div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</section>

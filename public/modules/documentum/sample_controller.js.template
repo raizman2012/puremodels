@@ -1,0 +1,12 @@
+'use strict';
+
+/**
+ * Angular controller for 'sampleName' snippet
+ */
+angular.module('snippets').controller('SampleController', ['$scope', 'clientMockData',
+    function ($scope, clientMockData) {
+
+        $scope.snippetId = 'sampleName';
+        console.log($scope.snippetId+ ' ok. data:', clientMockData.customers);
+    }
+]);

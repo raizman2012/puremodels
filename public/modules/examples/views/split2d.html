@@ -1,0 +1,30 @@
+<div data-ng-controller="SplitController">
+    <h3>Year view {{selectedDay}}:{{selectedMonth}}</h3>
+    <div style="display: table"></div>
+    <div style="display: table-row" >
+        <div class="text-center vertical-align"
+             style="display: table-cell; padding: 4px; border: 1px solid white; cursor: pointer"
+             ng-repeat="date in header track by $index">
+            <strong>0{{date}}</strong>
+        </div>
+    </div>
+    <div style="display: table-row" ng-repeat="month in months " ng-init="monthIndex = $index">
+        <div class="text-center vertical-align ng-class:(monthIndex == selectedMonth && $index == selectedDay) ? 'bg-primary' : $index%7 == 6 ? 'bg-danger' : $index%7 == 5 ? 'bg-warning' : 'bg-info'"
+             style="display: table-cell; padding: 4px; border: 1px solid white; cursor: pointer"
+             ng-repeat="date in month track by $index"
+             ng-click="clickOnDateInYear(monthIndex, $index, date.dd)">
+            <strong title="{{date.day}}">{{date.dd}}</strong>
+        </div>
+    </div>
+
+    <h3>Month 01/2015</h3>
+    <div style="display: table"></div>
+    <div style="display: table-row" ng-repeat="datesRow in arrayToReturn" ng-init="i = $index">
+        <div class="text-center vertical-align ng-class:selectableDates.getSelectedIndex() === i * pageSize + $index ? 'bg-primary' : 'bg-info'"
+             style="display: table-cell; padding: 9px; border: 1px solid white; cursor: pointer"
+             ng-repeat="date in datesRow"
+             ng-click="clickOnDate(i, $index)">
+            <strong>{{date}}</strong>
+        </div>
+    </div>
+</div>

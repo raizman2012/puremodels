@@ -38,6 +38,15 @@ module.exports = function(grunt) {
 			}
 		},
 
+		cssjanus : {
+			theme: {
+				options : {
+					generateExactDuplicates : true
+				},
+				files: assetsAll.cssjanus
+			}
+		},
+
 		concat: {
 			dist: {
 				src: library_src,
@@ -100,5 +109,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('prepare_release', ['concat:dist', 'uglify:dist', 'ngdocs:api']);
 
 	// Default task(s).
-	grunt.registerTask('default', ['less', 'concurrent:default']);
+	grunt.registerTask('default', ['less', 'cssjanus', 'concurrent:default']);
 };

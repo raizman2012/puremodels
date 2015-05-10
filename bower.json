@@ -1,7 +1,7 @@
 {
   "name": "puremodels",
   "description": "usefull angular services for typical operations",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "private": false,
   "ignore": [
@@ -17,17 +17,20 @@
     "angular": "~1.2",
     "font-awesome": "~4.3.0",
     "bootstrap": "~3",
-    "angular": "~1.2",
     "angular-resource": "~1.2",
     "angular-animate": "~1.2",
+    "angular-route": "~1.2",
     "angular-mocks": "~1.2",
+    "angular-cookies": "~1.2",
     "angular-bootstrap": "~0.12.0",
     "angular-ui-utils": "~0.1.1",
     "angular-ui-router": "~0.2.11",
     "dotjem-angular-tree": "0.1.4",
     "angular-highlightjs": "~0.3.2",
     "postal": "~1.0.0",
-    "angular-dragdrop" : "1.0.11",
-    "underscore" : "~1.8.2"
+    "angular-dragdrop": "1.0.11",
+    "underscore": "~1.8.2",
+    "angular-translate": "~2.6.1",
+    "angular-bootstrap-slider": "~0.1.1"
   }
 }

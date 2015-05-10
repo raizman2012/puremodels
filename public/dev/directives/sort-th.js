@@ -5,5 +5,5 @@ angular.module('ng-puremodels').directive('sortTh', function () {
             pname : '='
         },
         templateUrl: 'dev/directives/sort-th.html'
-    };
+    }
 });

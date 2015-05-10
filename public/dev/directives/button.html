@@ -1,0 +1,7 @@
+<button ng-if="action.visible"
+        class="{{action.btnClasses}} {{btnClasses}}"
+        ng-click="action.invoke()"
+        ng-disabled="action.disable">
+    <i class="{{action.iconClasses}} {{iconClasses}}"></i>
+    <span translate>{{action.text}}</span>
+</button>

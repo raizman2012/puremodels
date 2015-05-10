@@ -1,0 +1,9 @@
+<div class="btn-group {{btnGroupGlasses}}" role="group" >
+    <button ng-repeat="action in actions"
+            class="{{action.btnClasses}}"
+            ng-click="action.invoke()"
+            ng-disable="action.state">
+        <i class="{{action.iconClasses}}"></i>
+        <span translate>{{action.text}}</span>
+    </button>
+</div>

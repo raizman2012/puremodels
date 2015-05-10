@@ -14,7 +14,6 @@ angular.module('ng-puremodels').factory('sortable', ['selectable', 'sorting', fu
 
                     var status = sorter.statuses[pname];
 
-                    //console.log('in sort', pname, 'status:', status);
                     if (status === undefined) {
                         console.log('null for:', pname);
                     }
@@ -35,7 +34,16 @@ angular.module('ng-puremodels').factory('sortable', ['selectable', 'sorting', fu
                         return status.sortDir * 1;
                     }
 
-                    var res = va.localeCompare(vb) * status.sortDir;
+                    if (angular.isFunction(va.localeCompare)) {
+                        var res = va.localeCompare(vb) * status.sortDir;
+                    } else {
+                        if (va == vb) {
+                            return 0;
+                        }
+
+                        var res = va > vb ? status.sortDir : -1 * status.sortDir;
+                    }
+
 
                     return res;
                 }

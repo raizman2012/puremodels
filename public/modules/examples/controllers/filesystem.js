@@ -2,7 +2,7 @@
 
 angular.module('examples').controller('FilesystemController', ['$scope', 'tree', 'selectable', 'filesystemData',
     function ($scope, tree, selectable, filesystemData) {
-        console.log('filesystem');
+        console.log('filesystem files:', filesystemData.files);
 
         $scope.treeFromData = new tree(filesystemData.files);
 

@@ -6,6 +6,7 @@ var lodash = require('lodash');
 var glob = require('glob');
 
 var config = require('./config');
+var rtl_helper = require('./rtl_helper');
 
 /**
  * This project is library project, and thats the reason we need special logic for static assets
@@ -84,7 +85,9 @@ module.exports = function (dir) {
         public : res_public
     };
 
+    //console.log(assets);
+    rtl_helper.addRtlCss(assets);
 
-
+    //console.log(assets);
     return assets;
 }

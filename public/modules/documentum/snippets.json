@@ -1,0 +1,23 @@
+{
+  "documents": [
+    "documents_table",
+    "documents_search",
+    "documents_folders_table",
+    "documents_upload"
+  ],
+  "dialogs": [
+    "document_dialog_upload",
+    "document_properties_popup"
+  ],
+  "forms": [
+    "document_properties_input",
+    "folder_properties_input"
+  ],
+  "pages": [
+    "tree_folder",
+    "tree_search",
+    "tree_folder_toolbar_table",
+    "tree_dnd",
+    "tree_viewer"
+  ]
+}

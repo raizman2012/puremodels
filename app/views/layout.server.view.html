@@ -21,12 +21,31 @@
 
     <!--libraries CSS Files-->
     {% for cssFile in assets.public.css.dependencies %}
-    <link rel="stylesheet" href="{{cssFile}}">
+
+    {% if (language !== 'hebrew') %}
+        {% if (assets.public.ltr_css[cssFile]) %}
+            <link rel="stylesheet" href="{{assets.public.ltr_css[cssFile]}}">
+        {% endif %}
+    {% else %}
+        {% if (assets.public.rtl_css[cssFile]) %}
+        <link rel="stylesheet" href="{{assets.public.rtl_css[cssFile]}}">
+        {% endif %}
+    {% endif %}
     {% endfor %}
 
     <!--Application CSS Files-->
     {% for cssFile in assets.public.css.src_notests %}
-    <link rel="stylesheet" href="{{cssFile}}">
+
+    {% if (language !== 'hebrew') %}
+        {% if (assets.public.ltr_css[cssFile]) %}
+            <link rel="stylesheet" href="{{assets.public.ltr_css[cssFile]}}">
+        {% endif %}
+    {% else %}
+        {% if (assets.public.rtl_css[cssFile]) %}
+            <link rel="stylesheet" href="{{assets.public.rtl_css[cssFile]}}">
+        {% endif %}
+    {% endif %}
+
     {% endfor %}
 
     <!-- HTML5 Shim -->
@@ -40,10 +59,11 @@
 <header data-ng-include="'modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
 <section class="content" style="margin-top: 50px">
     <section class="container">
+
         {% block content %}{% endblock %}
     </section>
 </section>
-
+{{req.cookies.language}}
 <!--Libraries JavaScript Files-->
 {% for jsFile in assets.public.javascripts.dependencies %}
 <script type="text/javascript" src="{{jsFile}}"></script>
@@ -56,12 +76,13 @@
 
 <!--[if lt IE 9]>
 <section class="browsehappy jumbotron hide">
-    <h1>Hello there!</h1>
+    <h1>Hello there! </h1>
     <p>You are using an old browser which we unfortunately do not support.</p>
     <p>Please <a href="http://browsehappy.com/">click here</a> to update your browser before using the website.</p>
     <p><a href="http://browsehappy.com" class="btn btn-primary btn-lg" role="button">Yes, upgrade my browser!</a></p>
 </section>
 <![endif]-->
+
 </body>
 
 </html>
