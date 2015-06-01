@@ -40,7 +40,7 @@ angular.module('core').controller('DocumentumController', ['$scope', '$http', '$
         console.log('menuData:',menuData);
         $scope.menuTree = new tree(menuData);
         $scope.menuTree.expandAllAsync($scope.menuTree.rootNode, function() {});
-        $scope.menuTree.selectNode($scope.menuTree.rootNode.children[0].children[0]);
+        $scope.menuTree.selectNode($scope.menuTree.rootNode.children[3].children[2]);
         console.log('$scope.menuTree.rootNode:', $scope.menuTree.rootNode);
         function load() {
 

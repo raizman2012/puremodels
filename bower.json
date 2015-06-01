@@ -14,23 +14,26 @@
     "package.json"
   ],
   "dependencies": {
-    "angular": "~1.2",
+    "pdfjs-dist": "1.0.1194",
+    "angular": "~1.3",
     "font-awesome": "~4.3.0",
     "bootstrap": "~3",
-    "angular-resource": "~1.2",
-    "angular-animate": "~1.2",
-    "angular-route": "~1.2",
-    "angular-mocks": "~1.2",
-    "angular-cookies": "~1.2",
-    "angular-bootstrap": "~0.12.0",
+    "angular-resource": "~1.3",
+    "angular-animate": "~1.3",
+    "angular-route": "~1.3",
+    "angular-mocks": "~1.3",
+    "angular-cookies": "~1.3",
+    "angular-bootstrap": "",
     "angular-ui-utils": "~0.1.1",
     "angular-ui-router": "~0.2.11",
     "dotjem-angular-tree": "0.1.4",
-    "angular-highlightjs": "~0.3.2",
+    "angular-highlightjs": "",
     "postal": "~1.0.0",
-    "angular-dragdrop": "1.0.11",
+    "angular-dragdrop": "",
     "underscore": "~1.8.2",
-    "angular-translate": "~2.6.1",
-    "angular-bootstrap-slider": "~0.1.1"
+    "lodash" : "3.1.0",
+    "angular-translate": "",
+    "angular-bootstrap-slider": "~0.1.1",
+    "angular-pdf" : ""
   }
 }

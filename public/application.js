@@ -1,7 +1,7 @@
 'use strict';
 
 //Start by defining the main module and adding the module dependencies
-angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfiguration.applicationModuleVendorDependencies);
+var app = angular.module(ApplicationConfiguration.applicationModuleName, ApplicationConfiguration.applicationModuleVendorDependencies);
 
 // Setting HTML5 Location Mode
 angular.module(ApplicationConfiguration.applicationModuleName).config(['$locationProvider','$stateProvider', '$urlRouterProvider',
@@ -10,6 +10,26 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 
 	}
 ]);
+//
+//app.config(function($httpProvider) {
+//
+//	//Enable cross domain calls
+//
+//	$httpProvider.defaults.useXDomain = true;
+//
+//	$httpProvider.defaults.withCredentials = true;
+//
+//
+//	var dctmUser="testuser";
+//	var dctmPassword="dm123cloud";
+//
+//
+//	var aheader = 'Basic ' + btoa(dctmUser + ":" + dctmPassword);
+//
+//
+//	$httpProvider.defaults.headers.common['Authorization'] = aheader;
+//
+//});
 
 // integrate 'postal' bus
 angular.module(ApplicationConfiguration.applicationModuleName)

@@ -23,6 +23,7 @@ angular.module('ng-puremodels').directive('iconButton', function () {
         link : function(scope, element, attrs) {
 
             //console.log('in link: controller:', scope);
+            // later
         },
         templateUrl: 'dev/directives/button.html'
     }

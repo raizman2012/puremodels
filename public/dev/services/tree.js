@@ -49,7 +49,6 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
         }
 
         function resetNode(node) {
-            //console.log('resetNode');
             if (node.children === undefined) {
                 return;
             }
@@ -73,9 +72,7 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
         }
 
         function dropNodeOnAnotherNode(node, anotherNode) {
-            console.log('anotherNode:', anotherNode);
             if (anotherNode.leaf) {
-                //console.log('move', node.path);
                 moveNodeAfterAnotherNode(node, anotherNode);
                 return;
             } else {
@@ -91,26 +88,19 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
         }
 
         function deleteNode(node) {
-            //console.log('delete node:', node.id, ' p:', node.path);
             var parentNode = getParent(node);
             if (parentNode === undefined) {
                 return; // cant remove root
             }
             var indexOfNodeInParent = node.path[node.path.length-1];
-            //console.log('delete node indexOfNodeInParent: ', indexOfNodeInParent);
-
-            //console.log(' parentNode.children',  parentNode.children.length);
             parentNode.children.splice(indexOfNodeInParent, 1);
-            //console.log(' parentNode.children',  parentNode.children.length);
             resetNode(parentNode);
         }
 
         function moveNodeAfterAnotherNode(node, anotherNode) {
-            //console.log('hey, you move me:' , node.path, ' on ', anotherNode.path);
             deleteNode(node);
 
             var parentOfAnotherNode = getParent(anotherNode);
-            //console.log('parentOfAnotherNode.path:', parentOfAnotherNode.path);
             var index = parentOfAnotherNode.children.length; // default
 
             // find index of another node, which can be probably changed after deleting
@@ -216,6 +206,7 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
                 if (node.children === undefined) {
                     node.loading = true;
                     provider.getChildren(node.data, function (children) {
+
                         node.loading = false;
                         node.children = [];
                         for (var i = 0; i < children.length; i++) {
@@ -273,7 +264,6 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
             if (node === undefined) {
                 node = _this.rootNode;
             }
-            console.log('collapse:', node.path);
             collapseAllPrivate(node);
 
             recomputeArrayOfVisibleNodes();
@@ -338,7 +328,6 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
             var indexInParent = node.path[node.path.length-1];
             var nextIndexInParent = indexInParent+1;
             if (node.leaf) {
-                //console.log('leaf');
                 if (nodeParent.children.length === nextIndexInParent) {
                     callback(findNextInParent(node));
                 } else {
@@ -347,7 +336,6 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
                     return;
                 }
             } else {
-                // console.log('not leaf');
                 // not leaf
                 expandNodeAsync(node, function(nn){
                     if (nn.children !== undefined && nn.children.length > 0) {
@@ -401,7 +389,6 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
             var res = [];
             collectExpandedNodesWithLeafs(rootNode, res);
             rootNode.expandedNodesAndLeafs = res;
-            //console.log('res:',res);
             return res;
         }
 
@@ -414,7 +401,6 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
 
 
         this.rootNode = rootNode;
-
 
         // public methods
 

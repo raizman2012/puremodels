@@ -20,6 +20,8 @@ module.exports = {
             './public/lib/lodash/lodash.min.js',
             './public/lib/postal/lib/postal.min.js',
             './public/lib/angular-dragdrop/src/angular-dragdrop.js',
+            './public/lib/pdfjs-dist/build/pdf.js',
+            './public/lib/angular-pdf/dist/angular-pdf.js',
             './public/lib/jquery-ui/jquery-ui.js']
     }],
 

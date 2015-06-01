@@ -66,7 +66,7 @@ module.exports = function() {
 		} else {
 			res.locals.language = 'english';
 		}
-		console.log('res.locals.language:'+res.locals.language);
+		//console.log('res.locals.language:'+res.locals.language);
 		next();
 	});
 
