@@ -32,7 +32,7 @@
         it('test  sorting status change', inject(function(paging) {
             var pager = new paging();
 
-            console.log('pager');
+            //console.log('pager');
             expect(pager.currentPage).toEqual(0);
 
             expect(pager.hasPrev()).toBeFalsy();

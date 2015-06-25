@@ -27,7 +27,9 @@ module.exports = {
 
     library_src : [
         {file: './public/dev/module.js'},
-        {dir: './public/dev/services/*.js'}
+        {dir: './public/dev/services/*.js'},
+        {dir: './public/dev/directives/*.js'},
+        {dir: './public/dev/filters/*.js'}
     ],
 
     src: [
@@ -36,8 +38,7 @@ module.exports = {
         {dir: './public/dev/*/*.js'},
         {dir: './public/modules/*/*.js'},
         {dir: './public/modules/*/*/*.js'},
-        {dir: './public/modules/snippets/*/*/*.js'},
-        {dir: './public/modules/documentum/*/*/*.js'}
+        {dir: './public/modules/snippets/*/*/*.js'}
     ],
 
     tests: [

@@ -1,0 +1,60 @@
+<div data-ng-controller="BooleanController">
+    <div class="row">
+        <div class="col-md-6"><!-- comment -->
+            <h4>On button for one state</h4>
+
+            <div>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" ng-click="state.toggle('available')"
+                            class="btn ng-class:state.names.available ? 'btn-success' : 'btn-default'">
+                        {{state.names.available}}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6"><!-- comment -->
+            <h4>Number of states, single selection</h4>
+
+            <div>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button ng-repeat="name in states1.list" type="button"
+                            ng-click="states1.selectOne(name)"
+                            class="btn ng-class:states1.names[name] ? 'btn-success' : 'btn-default'">{{name}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6">
+            <h4>Two button for one state</h4>
+
+            <div>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" ng-click="state.toggle('available')"
+                            class="btn ng-class:state.names.available ? 'btn-success' : 'btn-default'">On
+                    </button>
+                    <button type="button" ng-click="state.toggle('available')"
+                            class="btn ng-class:state.names.available ? 'btn-default' : 'btn-danger'">Off
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6"><!-- comment -->
+            <h4>Number of states, multy selection</h4>
+
+            <div>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button ng-repeat="name in states2.list" type="button"
+                            ng-click="states2.toggle(name)"
+                            class="btn ng-class:states2.names[name] ? 'btn-success' : 'btn-default'">{{name}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <br/>
+</div>

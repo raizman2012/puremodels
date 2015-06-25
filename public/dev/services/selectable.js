@@ -1,13 +1,13 @@
 /**
  * @ngdoc service
- * @name ng-puremodels.service:selectableList
+ * @name ng-puremodels.service:selectable
  *
  * @description
  * wrap array with select-unselect-event on select functionality
  * selection can be 'single' : only one index can be selected,
  * and 'multi' when number of elements are selected.
  *
- * Two modules of selection are not affecting each other.
+ * Two types of selection(single and multi) are not affecting each other.
  **/
 angular.module('ng-puremodels').factory('selectable', function () {
     var res = function (someList) {
@@ -243,7 +243,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name getSelectedIndex
-         * @methodOf ng-puremodels.service:selectableList
+         * @methodOf ng-puremodels.service:selectable
          *
          * @description
          * return selected index in the array, or -1 if nothing selected
@@ -255,7 +255,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name getSelectedObject
-         * @methodOf ng-puremodels.service:selectableList
+         * @methodOf ng-puremodels.service:selectable
          *
          * @description
          * return selected object in the array, or undefined if nothing selected
@@ -267,7 +267,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name selectIndex
-         * @methodOf ng-puremodels.service:selectableList
+         * @methodOf ng-puremodels.service:selectable
          *
          * @description
          * change selected index and fire event if index was changed
@@ -279,7 +279,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name unselectIndex
-         * @methodOf ng-puremodels.service:selectableList
+         * @methodOf ng-puremodels.service:selectable
          *
          * @description
          * unselect index and fire event if index was changed
@@ -291,7 +291,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name unselectIndex
-         * @methodOf ng-puremodels.service:selectableList
+         * @methodOf ng-puremodels.service:selectable
          *
          * @description
          * toggle selection and fire event if index was changed
@@ -303,7 +303,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name fireChangeSelectionEvent
-         * @propertyOf ng-puremodels.service:selectableList
+         * @propertyOf ng-puremodels.service:selectable
          *
          * @description
          * function to invoke on change selection event
@@ -313,7 +313,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name fireChangeMultiSelectionEvent
-         * @propertyOf ng-puremodels.service:selectableList
+         * @propertyOf ng-puremodels.service:selectable
          *
          * @description
          * function to invoke on change multi selection event
@@ -325,7 +325,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name unselectAll
-         * @methodOf ng-puremodels.service:selectableList
+         * @methodOf ng-puremodels.service:selectable
          *
          * @description
          * unselect all objects
@@ -335,7 +335,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name selectAll
-         * @methodOf ng-puremodels.service:selectableList
+         * @methodOf ng-puremodels.service:selectable
          *
          * @description
          * select all objects
@@ -345,7 +345,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name toggleAll
-         * @methodOf ng-puremodels.service:selectableList
+         * @methodOf ng-puremodels.service:selectable
          *
          * @description
          * toggle  all objects multi selection
@@ -355,7 +355,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name multiSelect
-         * @methodOf ng-puremodels.service:selectableList
+         * @methodOf ng-puremodels.service:selectable
          *
          * @description
          * select object in multi selection
@@ -367,7 +367,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name multiUnselect
-         * @methodOf ng-puremodels.service:selectableList
+         * @methodOf ng-puremodels.service:selectable
          *
          * @description
          * unselect object in multi selection
@@ -379,7 +379,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name multiToggleSelect
-         * @methodOf ng-puremodels.service:selectableList
+         * @methodOf ng-puremodels.service:selectable
          *
          * @description
          * toggleSelect selection on object
@@ -391,7 +391,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name multiSelections
-         * @propertyOf ng-puremodels.service:selectableList
+         * @propertyOf ng-puremodels.service:selectable
          *
          * @description
          * array of booleans for selected states
@@ -401,7 +401,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name multiSelectedObjects
-         * @propertyOf ng-puremodels.service:selectableList
+         * @propertyOf ng-puremodels.service:selectable
          *
          * @description
          * array selected objects
@@ -411,7 +411,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name multiSelectedIndexes
-         * @propertyOf ng-puremodels.service:selectableList
+         * @propertyOf ng-puremodels.service:selectable
          *
          * @description
          * array selected indexes
@@ -420,7 +420,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name getList
-         * @methodOf ng-puremodels.service:selectableList
+         * @methodOf ng-puremodels.service:selectable
          *
          * @description
          * return array of objects
@@ -430,7 +430,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name list
-         * @propertyOf ng-puremodels.service:selectableList
+         * @propertyOf ng-puremodels.service:selectable
          *
          * @description
          * array of objects
@@ -440,7 +440,7 @@ angular.module('ng-puremodels').factory('selectable', function () {
         /**
          * @ngdoc method
          * @name indexOf
-         * @propertyOf ng-puremodels.service:selectableList
+         * @propertyOf ng-puremodels.service:selectable
          *
          * @description
          * find index of object in list, based on 'equal' method

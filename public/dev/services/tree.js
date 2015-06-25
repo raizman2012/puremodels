@@ -7,7 +7,7 @@
  * like trees, file systems, data structure etc
  **/
 angular.module('ng-puremodels').factory('tree', ['selectable', function (selectable) {
-    var result = function (someObject, provider) {
+    var result = function (someObject, provider, decorateNodeOnCreate) {
         var _this = this;
         var root = someObject;
         var selectedNode = undefined;
@@ -36,6 +36,8 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
             };
         }
 
+
+        // private methods
         function getParent(node) {
             var path = node.path;
             if (path.length === 0) {
@@ -92,7 +94,7 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
             if (parentNode === undefined) {
                 return; // cant remove root
             }
-            var indexOfNodeInParent = node.path[node.path.length-1];
+            var indexOfNodeInParent = node.path[node.path.length - 1];
             parentNode.children.splice(indexOfNodeInParent, 1);
             resetNode(parentNode);
         }
@@ -112,7 +114,7 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
                 }
             }
 
-            parentOfAnotherNode.children.splice(index+1, 0, node);
+            parentOfAnotherNode.children.splice(index + 1, 0, node);
 
             resetNode(parentOfAnotherNode);
         }
@@ -133,22 +135,62 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
             return res;
         }
 
-        function selectNode(node) {
-            node.selected = true;
-            selectedNode = node;
+        function setSelectedAndFireChangeEvent(node, isSelected) {
+
+            if (node === undefined) {
+                // wrong invocation
+                return;
+            }
+
+
+            if (selectedNode !== undefined && selectedNode.id === node.id && selectedNode.selected == node.selected) {
+                // nothing changed, do nothing
+                return;
+            }
+
+
+            var oldSelectedNode = selectedNode;
+            if (oldSelectedNode !== undefined) {
+                oldSelectedNode.selected = false;
+            }
+
+
+            if (isSelected == true) {
+                selectedNode = node;
+                selectedNode.selected = isSelected;
+            } else {
+                selectedNode = undefined;
+            }
+
+
+            // fire event
+            fireChangeSelectionEvent(oldSelectedNode, selectedNode);
 
 
         }
 
+        function fireChangeSelectionEvent(oldSelectedNode, newSelectedNode) {
+            try {
+                if (_this.fireChangeSelectionEvent !== undefined) {
+                    _this.fireChangeSelectionEvent(oldSelectedNode, newSelectedNode);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        function selectNode(node) {
+            setSelectedAndFireChangeEvent(node, true);
+        }
+
         function selectNodeAndLoadChildren(node, callback) {
-            node.selected = true;
-            selectedNode = node;
+            setSelectedAndFireChangeEvent(node, true);
 
             loadNodeChildrenAsync(node, callback);
         }
 
         function unselectNode(node) {
-            node.selected = false;
+            setSelectedAndFireChangeEvent(node, false);
         }
 
         function getSelectedNode() {
@@ -187,7 +229,7 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
 
 
         function expandNode(node) {
-            expandNodeAsync(node, function(nn) {
+            expandNodeAsync(node, function (nn) {
                 recomputeArrayOfVisibleNodes();
             });
         }
@@ -199,7 +241,8 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
 
         function loadNodeChildrenAsync(node, callback) {
             if (callback === undefined) {
-                callback = function() {};
+                callback = function () {
+                };
             }
 
             if (!node.leaf) {
@@ -214,8 +257,12 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
                             node.children.push(newNode);
                         }
 
+                        if (_this.decorateNodeOnCreate === undefined) {
+                            node.selectableChildren = new selectable(node.children);
+                        } else {
+                            _this.decorateNodeOnCreate(node);
+                        }
 
-                        node.selectableChildren = new selectable(node.children);
 
                         if (callback !== undefined) {
                             callback(node);
@@ -242,11 +289,11 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
 
         function expandAllAsync(node, callback) {
             if (!node.leaf) {
-                expandNodeAsync(node, function(nn) {
+                expandNodeAsync(node, function (nn) {
                     var count = 0;
                     for (var i = 0; i < nn.children.length; i++) {
                         var child = nn.children[i];
-                        expandAllAsync(child, function() {
+                        expandAllAsync(child, function () {
                             count++;
                             if (count === nn.children.length) {
                                 callback();
@@ -296,8 +343,8 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
                     break; // root node
                 }
 
-                var indexInParent = current.path[current.path.length-1];
-                var nextIndexInParent = indexInParent+1;
+                var indexInParent = current.path[current.path.length - 1];
+                var nextIndexInParent = indexInParent + 1;
 
                 var currentParent = getParent(current);
                 if (currentParent === undefined || currentParent.children.length === nextIndexInParent) {
@@ -325,8 +372,8 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
                 }
             }
 
-            var indexInParent = node.path[node.path.length-1];
-            var nextIndexInParent = indexInParent+1;
+            var indexInParent = node.path[node.path.length - 1];
+            var nextIndexInParent = indexInParent + 1;
             if (node.leaf) {
                 if (nodeParent.children.length === nextIndexInParent) {
                     callback(findNextInParent(node));
@@ -337,7 +384,7 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
                 }
             } else {
                 // not leaf
-                expandNodeAsync(node, function(nn){
+                expandNodeAsync(node, function (nn) {
                     if (nn.children !== undefined && nn.children.length > 0) {
                         // return first child
                         callback(nn.children[0]);
@@ -404,6 +451,20 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
 
         // public methods
 
+        function fireChangeSelectionEventDefault(oldSelectedObject, newSelectedObject) {
+            console.log('node selection:', oldSelectedObject, ';', newSelectedObject);
+        }
+
+        /**
+         * @ngdoc method
+         * @name fireChangeSelectionEvent
+         * @propertyOf ng-puremodels.service:tree
+         *
+         * @description
+         * function to invoke on change node selection event
+         */
+        this.fireChangeSelectionEvent = fireChangeSelectionEventDefault;
+
         /**
          * @ngdoc method
          * @name expandNode
@@ -416,6 +477,18 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
          */
         this.expandNode = expandNode;
 
+        /**
+         * @ngdoc method
+         * @name expandNodeAsync
+         * @methodOf ng-puremodels.service:tree
+         *
+         * @description
+         * expand node if it was not expanded, with callback
+         *
+         * @param {node} node to expand
+         * @param {callback} function to call when children are loaded
+         */
+        this.expandNodeAsync = expandNodeAsync;
 
         /**
          * @ngdoc method
@@ -547,6 +620,18 @@ angular.module('ng-puremodels').factory('tree', ['selectable', function (selecta
          * @param {callback} function to call when done
          */
         this.loadNodeChildrenAsync = loadNodeChildrenAsync;
+
+        /**
+         * @ngdoc method
+         * @name decorateNodeOnCreate
+         * @methodOf ng-puremodels.service:tree
+         *
+         * @description
+         * add more data on node when children are ready: for example create 'selectable' or 'paging'
+         * if not specified, create 'selectableChildren' as 'selectable'
+         * @param {node} node to decorate
+         */
+        this.decorateNodeOnCreate = decorateNodeOnCreate;
 
         /**
          * @ngdoc method

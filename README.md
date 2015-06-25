@@ -8,13 +8,12 @@
 
 As of 17 Jan 2015 The milestones are as follows:
 
-* The **0.0.2** milestone will be for bug fixes and more tests
-* The **0.0.3** milestone will contain more functionality for tree
-
+* The **0.0.7** milestone will contain new 'flags'
+* The **0.0.8** milestone will contain more tests and docs, and paging service
 
 ## Demo
 
-Do you want to see model in action? Visit {http://localhost:3000}
+Do you want to see model in action? Visit {http://puremodules.heroku.com}
 
 ## Installation
 
@@ -53,6 +52,7 @@ Modern mobile browsers should work without problems.
 We are  NOT  testing against IE8.
 
 ## Project philosophy
+Event small code should be reused
 
 ### Native, lightweight models
 

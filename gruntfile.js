@@ -63,6 +63,14 @@ module.exports = function(grunt) {
 			}
 		},
 
+		ngtemplates:  {
+			'ng-puremodels':        {
+				cwd:      'public',
+				src:      'dev/directives/*.html',
+				dest:     config.library_distdir+'/'+config.library_name+'.templates.js'
+			}
+		},
+
 		ngdocs: {
 			options: {
 				dest: './public/docs',
@@ -110,4 +118,7 @@ module.exports = function(grunt) {
 
 	// Default task(s).
 	grunt.registerTask('default', ['less', 'cssjanus', 'concurrent:default']);
+
+	// Default task(s).
+	grunt.registerTask('prod', ['ngdocs', 'less', 'cssjanus', 'concurrent:default']);
 };

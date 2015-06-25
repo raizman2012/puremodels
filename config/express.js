@@ -5,7 +5,6 @@
  */
 var config = require('./config'),
 	assets = require('./assets'),
-	snippets = require('./snippets'),
 	fs = require('fs'),
 	glob = require('glob'),
 	http = require('http'),
@@ -76,26 +75,7 @@ module.exports = function() {
 	// Setting the app router and static folder
 	app.use(express.static(path.resolve(config.publicStaticContentDir)));
 
-	// load metainfo about snippets
-	var allSnippets = {};
-	snippets.readMetatags(glob.sync('modules/snippets/views/**/*.html', {cwd: config.templatesDir}), allSnippets, config.templatesDir);
 
-	// create status html
-	var status = '<html>\n';
-	status += '<table border>';
-	_.each(allSnippets, function(value, key) {
-		var statusColor = 'white';
-		if (value.ready !== undefined) {
-			statusColor = 'green';
-		}
-		status += '<tr>';
-		status += '<td>'+path.basename(key)+'</td>';
-		status += '<td bgcolor=\"'+statusColor+'\">STATUS</td>';
-		status += '</tr>\n';
-	});
-	status += '\n</table>';
-	status += '\n</html>';
-	//fs.writeFile('status.html', status);
 
 	console.log('create routers');
 	app.get('/', function (req, res) {
@@ -106,20 +86,6 @@ module.exports = function() {
 		res.render('test', { test : 'leo'});
 	});
 
-	app.get('/snippets', function (req, res) {
-
-		res.json(allSnippets);
-	});
-
-	app.get('/snippet/:snippetId', function (req, res) {
-		var snippetId = req.params['snippetId'];
-		if (snippetId === undefined) {
-			return undefined;
-		}
-		var snippetInfo = snippets.findBySnippetId(snippetId, allSnippets);
-		console.log('snippetInfo:', snippetInfo);
-		res.json(snippetInfo);
-	});
 
 	app.get('/resources', function (req, res) {
 		var article = { test : 'bla'};

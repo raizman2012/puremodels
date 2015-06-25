@@ -38,6 +38,7 @@
     "underscore": "^1.8.2"
   },
   "devDependencies": {
+    "grunt-angular-templates": "^0.5.7",
     "grunt-concurrent": "~1.0.0",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-csslint": "^0.3.1",

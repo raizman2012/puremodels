@@ -16,7 +16,7 @@
                 </div>
                 <span style="padding-left: 10px" class="glyphicon glyphicon-road"> </span>
                 <li ng-repeat="node in treeFromData.getNodesBySelectedPath()">
-                    <a ng-if="!$last" href="#">{{node.data.name}}</a>
+                    <a ng-if="!$last" ng-click="treeFromData.selectNode(node)">{{node.data.name}}</a>
                     <span ng-if="$last">{{node.data.name}}</span>
                 </li>
 
@@ -116,15 +116,15 @@
                         <tr>
                             <th></th>
                             <th>#</th>
-                            <th>Name</th>
+                            <th>Name<span sort-th sorting="treeFromData.getSelectedNode().sortableChildren.sorting" pname="'data.name'" /></th>
                             <th>Modified</th>
                             <th>Author</th>
                         </tr>
                         </thead>
 
-                        <tr data-ng-repeat="node in treeFromData.getSelectedNode().selectableChildren.list"
-                            ng-click="treeFromData.getSelectedNode().selectableChildren.selectIndex($index)"
-                            ng-class="{active : treeFromData.getSelectedNode().selectableChildren.getSelectedIndex() == $index }">
+                        <tr data-ng-repeat="node in treeFromData.getSelectedNode().sortableChildren.list"
+                            ng-click="treeFromData.getSelectedNode().sortableChildren.selectable.selectIndex($index)"
+                            ng-class="{active : treeFromData.getSelectedNode().sortableChildren.selectable.getSelectedIndex() == $index }">
 
                             <td style="max-width: 10px; overflow-x: visible">
                                 <i ng-if="!node.leaf" ng-click="treeFromData.selectNodeAndLoadChildren(node)"
@@ -139,7 +139,7 @@
                             <td>{{node.data.modified}}</td>
                             <td>{{node.data.author}}</td>
                         </tr>
-                        <tr ng-if="!node.leaf && treeFromData.getSelectedNode().selectableChildren.list.length == 0">
+                        <tr ng-if="!node.leaf && treeFromData.getSelectedNode().sortableChildren.list.length == 0">
                             <td colspan="42">Folder is empty</td>
                         </tr>
                     </table>
