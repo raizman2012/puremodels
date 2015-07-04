@@ -1,7 +1,11 @@
 'use strict';
 
+var glob = require("glob");
+
 var config = require('./config/config'),
 	assets = require('./config/assets');
+
+var bower_package_dir = 'C:/startup/ng-puremodels/';
 
 module.exports = function(grunt) {
 	var assetsAll = assets(config.assets).all;
@@ -54,6 +58,19 @@ module.exports = function(grunt) {
 			}
 		},
 
+		copy: {
+			bower_lib_project: {
+				files: [
+					{
+						cwd: config.library_distdir,
+						expand: true,
+						flatten: true,
+						src: ['*.*'],
+						dest: bower_package_dir
+					}
+				]
+			}
+		},
 		uglify: {
 			dist: {
 				files: [{
@@ -114,7 +131,7 @@ module.exports = function(grunt) {
 	grunt.option('force', true);
 
 	// Release task(s).
-	grunt.registerTask('prepare_release', ['concat:dist', 'uglify:dist', 'ngdocs:api']);
+	grunt.registerTask('release', ['concat:dist', 'uglify:dist', 'copy:bower_lib_project']);
 
 	// Default task(s).
 	grunt.registerTask('default', ['less', 'cssjanus', 'concurrent:default']);

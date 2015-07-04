@@ -1,0 +1,23 @@
+{
+  "name": "ng-puremodels",
+  "version": "0.0.9",
+  "authors": [
+    "raizman2012 <raizman_leonid@hotmail.com>"
+  ],
+  "description": "set of angular services for common tasks",
+  "main": "puremodels.js",
+  "keywords": [
+    "angular"
+  ],
+  "dependencies": {
+    "angular": ""
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
